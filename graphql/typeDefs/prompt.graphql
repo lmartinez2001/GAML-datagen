@@ -1,0 +1,20 @@
+input PromptInput {
+  question: String!
+  answer: String!
+}
+
+type Prompt {
+  id: String!
+  question: String!
+  answer: String!
+}
+
+type Query {
+  prompt(id: String!): Prompt
+  prompts: [Prompt]
+}
+
+type Mutation {
+  createPrompt(input: PromptInput!): Prompt
+  deletePrompt(id: String!): Prompt
+}
