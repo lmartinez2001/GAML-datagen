@@ -19,8 +19,10 @@ const bootstrapServer = async () => {
   app.use(express.urlencoded({ extended: true }))
   app.use('/graphql', expressMiddleware(server))
 
+  app.use(express.static('public'))
+
   app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.sendFile('index.html', { root: 'public' })
   })
 
   app.listen(PORT, () => {
