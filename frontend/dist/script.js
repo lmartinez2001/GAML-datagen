@@ -10,7 +10,16 @@ const questionArea = document.querySelector('#question-area')
 const warningMsg = document.querySelector('#warning-msg')
 const submitButton = document.querySelector('#submit-btn')
 
-const keywords = ['species', 'experiment', 'int', 'float', 'output','chart', 'data', 'string']
+const keywords = [
+  'species',
+  'experiment',
+  'int',
+  'float',
+  'output',
+  'chart',
+  'data',
+  'string',
+]
 
 let prompt
 
@@ -25,22 +34,17 @@ questionArea.addEventListener('input', () => {
   checkAreasFilled()
 })
 
-answerArea.addEventListener('input', (event) => {  
+answerArea.addEventListener('input', (event) => {
   checkAreasFilled()
 })
 
 submitButton.addEventListener('click', () => {
   // feed prompt q&a
-  prompt = {
-    q:  questionArea.value,
-    a:  answerArea.value,
-  }
-  
   axios({
-  url: 'http://localhost:8000/graphql',
-  method: 'post',
-  data: {
-    query: `
+    url: 'http://localhost:8000/graphql',
+    method: 'post',
+    data: {
+      query: `
       mutation CreatePrompt($input: PromptInput!) 
       {
         createPrompt(input: $input) {
@@ -50,33 +54,30 @@ submitButton.addEventListener('click', () => {
         }
       }
       `,
-    variables: {
-      input: {
-        question: prompt.q,
-        answer: prompt.a,
-      } 
-    }
-  }
-}).then((result) => {
-  console.log(result.data)
-})
-  
-  console.log(prompt)
-  
+      variables: {
+        input: {
+          question: questionArea.value,
+          answer: answerArea.value,
+        },
+      },
+    },
+  }).then((result) => {
+    console.log(result.data)
+  })
+
   //   empty text area
-  questionArea.value = ""
-  answerArea.value = ""
-  
+  questionArea.value = ''
+  answerArea.value = ''
+
   warningMsg.innerText = msgs.success
-  
-   submitButton.disabled = true
-  
+
+  submitButton.disabled = true
+
   setTimeout(() => {
-     warningMsg.innerText = msgs.default
+    warningMsg.innerText = msgs.default
   }, 1000)
-  
 })
 
 const checkAreasFilled = () => {
-  submitButton.disabled = (questionArea.value === "") || (answerArea.value === "")
+  submitButton.disabled = questionArea.value === '' || answerArea.value === ''
 }
