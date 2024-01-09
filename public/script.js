@@ -10,19 +10,6 @@ const questionArea = document.querySelector('#question-area')
 const warningMsg = document.querySelector('#warning-msg')
 const submitButton = document.querySelector('#submit-btn')
 
-const keywords = [
-  'species',
-  'experiment',
-  'int',
-  'float',
-  'output',
-  'chart',
-  'data',
-  'string',
-]
-
-let prompt
-
 const msgs = {
   default: 'Fill Question and Answer sections to submit',
   qwarning: 'Fill Question section to submit',
@@ -41,7 +28,7 @@ answerArea.addEventListener('input', (event) => {
 submitButton.addEventListener('click', () => {
   // feed prompt q&a
   axios({
-    url: 'http://localhost:8000/graphql',
+    url: `${document.location.origin}/graphql`,
     method: 'post',
     data: {
       query: `
