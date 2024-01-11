@@ -12,10 +12,10 @@ git clone git@github.com:lmartinez2001/GAML-datagen.git
 cd GAML-datagen
 ```
 
-- Fill the `.env.example` file with the required informations, according to your configuration. Then rename it `.env`
-  .
+- Fill the `.env.example` file with the required informations, according to your configuration. Then rename it `.env`.
 
-  > [!WARNING] > `DB_HOST_CLIENT` and `DB_HOST_DOCKER` correspond respectively to the host from the user point of view and the host from the Docker container point of view. This distinction is essential in the `DATABASE_URL` field, as some commands such as the database schema migration are executed by the user, whereas the requests sent to the database are performed between two Docker container.
+> [!WARNING]
+> `DB_HOST_CLIENT` and `DB_HOST_DOCKER` correspond respectively to the host from the user point of view and the host from the Docker container point of view. This distinction is essential in the `DATABASE_URL` field, as some commands such as the database schema migration are executed by the user, whereas the requests sent to the database are performed between two Docker container.
 
 - Build the Docker container:
 
