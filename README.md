@@ -5,24 +5,17 @@ To contribute to this project by creating some prompts, please email email.examp
 
 ## Writing prompts
 
-As these prompts are used to efficemtly finetune an LLM, they must follow some strict rules. What's more, there are three different types of expected prompts:
+As these prompts are used to efficently finetune an LLM, they must follow some strict rules. What's more, there are three different types of expected prompts:
 
-### General prompts
+### Text to Text prompts
 
-These prompts are used to bring the general context of GAMA platform and GAML. They allow to LLM to create some logical and semantic analogies between GAML and other programming languages.
+These prompts are used to bring the general context of the GAMA platform and GAML. They allow the LLM to create some logical and semantic analogies between GAML and other programming languages.  
+As illustrated in the below examples, this type of question-answer prompt looks a bit useless, as the main purpose of the model is to generate code. However, these prompts are essential to provide the LLM with a general context. That way it can create analogies between GAML and other programming languages learned by the LLM during its pre-training.
 
 > [!NOTE]
-> As illustrated in below examples, this type of question-answer prompt looks a bit unnatural or even useless, as the input is not really a question, and the expected output sounds like it confirms the input. However these affirmative prompts are essential to feed the LLM with a general context.
+> Answers provided by the LLM can contain pieces of code. But they will be considered as part of the whole answer text but not as a separate code snippet. (Take a look at the Examples section )
 
 **Examples**
-
-    QUESTION
-        Your goal is to answer questions and provide code related to GAML programming language. You can output either code snippets or instructions aboute a specific need.
-
-    ANSWER
-        I'm an AI being developped to answer questions about GAML programming language. I can generate code snippets or more complex models, or answer general question about GAML or the GAMA Platform.
-
----
 
     QUESTION
         What is GAML programming language?
@@ -41,44 +34,20 @@ These prompts are used to bring the general context of GAMA platform and GAML. T
 ---
 
     QUESTION
-        How to use the statement "equation"?
+        How to declare a new type of agents in GAML?
 
     ANSWER
-        The equation statement is used to create an equation system from several single equations.
-        The basic syntax to define an equation system is:
-
-        float t;
-        float S;
-        float I;
-        equation SI {
-            diff(S,t) = (- 0.3 * S * I / 100);
-            diff(I,t) = (0.3 * S * I / 100);
-
-}
+        In GAML, a new type of agent is created with the expression `species nameOfSpecies`. Please refer to https://gama-platform.org/wiki/Statements#species for additional informations.
 
 ---
 
-    QUESTION
-        In GAML, a type of agents is declared using the keyword "species". This statement uses can contains all the variables (such as integers, floats, references to other species, etc.), reflexes and actions that define the behaviour of the species.
+### Text to Code prompts
 
-    ANSWER
-        species ExampleSpecies {
-            int x <- 10;
-            int y <- 15;
-            float health <- 0.8;
-
-            reflex move {
-                health <- health + 0.01;
-            }
-        }
-
-### Code prompts
-
-The LLM must be fed with plenty of code examples to learn how to combine the different statements with eachother, as well as the best practices specific to GAML.  
+The LLM must be fed with plenty of code examples to learn how to combine the different statements with each other, as well as the GAML best coding practices GAML.  
 Questions must be either small instructions asking for short code snippets or longer instructions asking to generate more complex models.
 
 > [!IMPORTANT]
-> This type of prompts includes all the GAMA-platform documentation
+> The code snippets provided in the answer section must be valid expressions. In other words, a user should be able to copy and paste the code snippet in GAMA and execute it with no error. For instance, all the variables used in the code snippet must be declared (and initialized if necessary).
 
 **Examples**
 
@@ -103,9 +72,21 @@ Questions must be either small instructions asking for short code snippets or lo
 
 ---
 
-### Documentation prompts
+    QUESTION
+        How to get the area of a geometry?
 
-TODO
+    ANSWER
+        geometry geom <- circle(5);
+        float a <- geom.area;
+
+---
+
+### Text to Hybrid prompts
+
+These prompts are so-called because they are a mixture between code and text. This type of prompt mainly concerns the conversion of the [GAML documentation](https://gama-platform.org/wiki/Home) into prompts. As most of the types, statements and built-in features are defined and then followed by an example, the LLM must learn how to switch from code to text and vice-versa.
+
+> [!NOTE]
+> The easiest to do so is to copy/paste the documentation into prompts
 
 **Examples**
 
