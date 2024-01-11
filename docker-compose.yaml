@@ -17,7 +17,7 @@ services:
     build:
       context: .
     environment:
-      DB_HOST: ${DB_HOST}
+      DB_HOST: ${DB_HOST_CLIENT}
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
       DB_PWD: ${DB_PWD}
@@ -27,6 +27,16 @@ services:
       - postgres
     ports:
       - 0.0.0.0:8000:8000
+
+  gama-server:
+    container_name: gama-server
+    image: gamaplatform/gama:1.9.2
+    command: '-socket 7000'
+    #ports:
+    #  - 0.0.0.0:7000:7000
+    depends_on:
+      - postgres
+      - gamlgen
 
 volumes:
   postgres-data:
