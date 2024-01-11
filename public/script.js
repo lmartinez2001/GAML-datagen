@@ -9,6 +9,9 @@ const answerArea = document.querySelector('#answer-area')
 const questionArea = document.querySelector('#question-area')
 const warningMsg = document.querySelector('#warning-msg')
 const submitButton = document.querySelector('#submit-btn')
+const instructionsTitle = document.querySelector('#instructions-title')
+const instructionsText = document.querySelector('#instructions-text')
+const instructionsIndicator = document.querySelector('#instructions-indicator')
 
 const msgs = {
   default: 'Fill Question and Answer sections to submit',
@@ -68,3 +71,15 @@ submitButton.addEventListener('click', () => {
 const checkAreasFilled = () => {
   submitButton.disabled = questionArea.value === '' || answerArea.value === ''
 }
+
+instructionsTitle.addEventListener('click', () => {
+  var classlist = instructionsText.classList
+  classlist.toggle('invisible')
+  if (classlist.contains('invisible')) {
+    instructionsIndicator.classList.remove('fa-angle-up')
+    instructionsIndicator.classList.add('fa-angle-down')
+  } else {
+    instructionsIndicator.classList.remove('fa-angle-down')
+    instructionsIndicator.classList.add('fa-angle-up')
+  }
+})

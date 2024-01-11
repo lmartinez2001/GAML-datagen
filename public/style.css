@@ -26,6 +26,7 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
+  width: 80%;
 }
 
 h1 {
@@ -51,7 +52,7 @@ h1 {
   padding: 1rem;
   font-size: 1.2rem;
   border-radius: .4rem;
-  width: 500px;
+  width:  100%;
   height: 300px;
 }
 
@@ -94,15 +95,21 @@ h1 {
   cursor: pointer;
 }
 
-
-/* GAML code COLORS */
-.gaml-param {
-  color: #F39F3A;
+.invisible {
+  visibility: hidden;
 }
 
-.keyword {
-  color: #CC6C1D;
-  font-weight: bold;
+#instructions-title {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#instructions-container {
+  margin: 50px auto;
+}
+
+#instructions-text {
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 1300px) {

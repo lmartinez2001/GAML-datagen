@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>GAML Prompt Creator 1.0</title>
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -14,12 +14,12 @@
   <div class="area-container">
     <div class="item">
       <h2 class="title">Request</h2>
-      <textarea name="" id="question-area" cols="50" rows="30" class="content"></textarea>
+      <textarea id="question-area" cols="50" rows="30" class="content"></textarea>
     </div>
   
     <div class="item">
       <h2 class="title">Answer</h2>
-      <textarea name="" id="answer-area" cols="50" rows="30" class="content"></textarea>
+      <textarea id="answer-area" cols="50" rows="30" class="content"></textarea>
     </div>
   </div>
   
@@ -28,6 +28,15 @@
   <div class="btn-container">
      <button id="submit-btn" disabled>Submit</button>
   </div>
+
+  <div id="instructions-container">
+    <h2 id="instructions-title"><i id="instructions-indicator" class="fa-solid fa-angle-up"></i> Instructions</h2>
+
+    <div id="instructions-text">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti sunt iste corporis quae. Non molestias sequi quaerat doloribus laudantium natus praesentium, odio quibusdam? Inventore, earum laborum quis quae, ipsam deleniti, consequatur necessitatibus dolore omnis optio velit officiis nihil vitae porro? Quia soluta quasi, totam ad esse, fuga a reprehenderit quisquam veritatis molestias provident nemo! Harum provident odio, maxime non impedit molestiae optio reprehenderit consectetur, dolore aperiam, est quam reiciendis culpa assumenda. Quasi unde neque saepe, optio repellat quos esse, nisi accusamus temporibus laborum, omnis dolor similique ad. Et maiores, sed nostrum rem, ullam ad architecto perspiciatis, in quia iusto numquam!</p>
+    </div>
+  </div>
+  
   
 </div>
 
