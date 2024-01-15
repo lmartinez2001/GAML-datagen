@@ -14,12 +14,8 @@ const alertComponent = async (alertType, title, content) => {
   </div>`
 }
 
-const replaceBlockquoteWithAlert = async (
-  blockquote,
-  alertType,
-  title,
-  text
-) => {
+const replaceBlockquoteWithAlert = async (blockquote, title, text) => {
+  const alertType = title.toLowerCase()
   const content = text
     .replace(/\[!NOTE\]|\[!TIP\]|\[!WARNING\]|\[!IMPORTANT\]/, '')
     .trim()
@@ -40,13 +36,15 @@ fetch(mdContent)
       const text = pElement.textContent
 
       if (text.startsWith('[!NOTE]')) {
-        replaceBlockquoteWithAlert(blockquote, 'note', 'Note', text)
+        replaceBlockquoteWithAlert(blockquote, 'Note', text)
       } else if (text.startsWith('[!TIP]')) {
-        replaceBlockquoteWithAlert(blockquote, 'tip', 'Tip', text)
+        replaceBlockquoteWithAlert(blockquote, 'Tip', text)
       } else if (text.startsWith('[!WARNING]')) {
-        replaceBlockquoteWithAlert(blockquote, 'warning', 'Warning', text)
+        replaceBlockquoteWithAlert(blockquote, 'Warning', text)
       } else if (text.startsWith('[!IMPORTANT]')) {
-        replaceBlockquoteWithAlert(blockquote, 'important', 'Important', text)
+        replaceBlockquoteWithAlert(blockquote, 'Important', text)
+      } else if (text.startsWith('[!CAUTION]')) {
+        replaceBlockquoteWithAlert(blockquote, 'Caution', text)
       }
     })
   })

@@ -76,10 +76,10 @@ instructionsTitle.addEventListener('click', () => {
   var classlist = instructionsText.classList
   classlist.toggle('invisible')
   if (classlist.contains('invisible')) {
-    instructionsIndicator.classList.remove('fa-angle-up')
-    instructionsIndicator.classList.add('fa-angle-down')
-  } else {
     instructionsIndicator.classList.remove('fa-angle-down')
     instructionsIndicator.classList.add('fa-angle-up')
+  } else {
+    instructionsIndicator.classList.remove('fa-angle-up')
+    instructionsIndicator.classList.add('fa-angle-down')
   }
 })
