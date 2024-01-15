@@ -10,7 +10,7 @@ const questionArea = document.querySelector('#question-area')
 const warningMsg = document.querySelector('#warning-msg')
 const submitButton = document.querySelector('#submit-btn')
 const instructionsTitle = document.querySelector('#instructions-title')
-const instructionsText = document.querySelector('#instructions-text')
+const instructionsText = document.querySelector('.md-block')
 const instructionsIndicator = document.querySelector('#instructions-indicator')
 
 const msgs = {
@@ -42,7 +42,7 @@ submitButton.addEventListener('click', () => {
           question
           answer
         }
-      }
+      }   
       `,
       variables: {
         input: {

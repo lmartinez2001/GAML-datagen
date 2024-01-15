@@ -4,6 +4,7 @@ const cors = require('cors')
 const { ApolloServer } = require('@apollo/server')
 const { expressMiddleware } = require('@apollo/server/express4')
 const { typeDefs, resolvers } = require('./graphql/index')
+const validateGAML = require('./middleware/validateGAML')
 
 const app = express()
 const PORT = process.env.APP_PORT || 80
@@ -17,6 +18,7 @@ const bootstrapServer = async () => {
   app.use(cors())
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
+  app.use('/graphql', validateGAML)
   app.use('/graphql', expressMiddleware(server))
 
   app.use(express.static('public'))

@@ -1,0 +1,145 @@
+:root {
+    --borderColor-default: white;
+    --link-color: #2F81F7;
+
+    --alert-warning: #dd9300;
+    --alert-note: #1F6FEB;
+    --alert-important: #c036f7;
+    --alert-tip: #24a73e;
+}
+
+
+/* GENERAL PROPERTIES OF MD BLOCK */
+.md-block {
+    margin-top: 20px;
+    word-wrap: break-word;
+    font-size: 1.1rem;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+}
+
+.md-block h1, .md-block h2, .md-block h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    line-height: 1.25;
+} 
+
+.md-block h1 {
+    padding-bottom: .3em;
+    font-size: 2em;
+    border-bottom: 1px solid var(--dark-grey);
+}
+
+.md-block h2 {
+    padding-bottom: .3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--dark-grey);
+}
+
+.md-block p, .md-block ul, .md-block ol, .md-block blockquote, .md-block pre, .md-block table {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.md-block ul {
+    padding-left: 2em;
+}
+
+.md-block ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.md-block hr {
+    height: .25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: var(--dark-grey);
+    border: 0;
+}
+
+.md-block pre {
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","CourierNew",monospace;
+    font-size: 85%;
+    padding: 16px;
+    overflow: auto;
+    line-height: 1.45;
+    border-radius: 6px;
+    color: var(--white);
+    background-color: var(--dark-grey);
+    scrollbar-color: var(--alert-note);
+}
+
+.md-block a {
+    color: var(--link-color);
+}
+
+
+/* HANDLING MARKDOWN ALERTS */
+.mr-2 {
+    margin-right: 8px !important;
+}
+
+.octicon {
+    display: inline-block;
+    overflow: visible !important;
+    vertical-align: text-bottom;
+    fill: currentColor;
+}
+
+.md-alert>:first-child {
+    margin-top: 0;
+}
+
+.md-alert .md-alert-title {
+    display: flex;
+    font-weight: 600;
+    align-items: center;
+    line-height: 1;
+}
+
+.md-alert.md-alert-warning .md-alert-title {
+    color: var(--alert-warning);
+}
+
+.md-alert.md-alert-note .md-alert-title {
+    color: var(--alert-note);
+}
+
+.md-alert.md-alert-important .md-alert-title {
+    color: var(--alert-important);
+}
+
+.md-alert.md-alert-tip .md-alert-title {
+    color: var(--alert-tip);
+}
+
+.md-alert.md-alert-warning {
+    border-left-color: var(--alert-warning);
+}
+
+.md-alert.md-alert-note {
+    border-left-color: var(--alert-note);
+}
+
+.md-alert.md-alert-important {
+    border-left-color: var(--alert-important);
+}
+
+.md-alert.md-alert-tip {
+    border-left-color: var(--alert-tip);
+}
+
+.md-alert {
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: .3em solid var(--borderColor-default);
+}
+
+
+/* HANDLING MARKDOWN CODE COMMENT SECTION */

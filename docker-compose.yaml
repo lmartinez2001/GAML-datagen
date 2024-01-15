@@ -5,7 +5,7 @@ services:
     container_name: postgres-1
     image: postgres
     ports:
-      - ${DB_PORT}:5432
+      - 0.0.0.0:${DB_PORT}:5432
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PWD}
@@ -13,30 +13,30 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  gamlgen:
-    build:
-      context: .
-    environment:
-      DB_HOST: ${DB_HOST_CLIENT}
-      DB_PORT: ${DB_PORT}
-      DB_USER: ${DB_USER}
-      DB_PWD: ${DB_PWD}
-      DB_NAME: ${DB_NAME}
-      DATABASE_URL: ${DATABASE_URL}
-    depends_on:
-      - postgres
-    ports:
-      - 0.0.0.0:8000:8000
+  # gamlgen:
+  #   build:
+  #     context: .
+  #   environment:
+  #     DB_HOST: ${DB_HOST_CLIENT}
+  #     DB_PORT: ${DB_PORT}
+  #     DB_USER: ${DB_USER}
+  #     DB_PWD: ${DB_PWD}
+  #     DB_NAME: ${DB_NAME}
+  #     DATABASE_URL: ${DATABASE_URL}
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - 0.0.0.0:8000:8000
 
-  gama-server:
-    container_name: gama-server
-    image: gamaplatform/gama:1.9.2
-    command: '-socket 7000'
-    #ports:
-    #  - 0.0.0.0:7000:7000
-    depends_on:
-      - postgres
-      - gamlgen
+  # gama-server:
+  #   container_name: gama-server
+  #   image: gamaplatform/gama:alpha
+  #   command: '-socket 7000'
+  #   ports:
+  #     - 0.0.0.0:7000:7000
+  #   depends_on:
+  #     - postgres
+  #     - gamlgen
 
 volumes:
   postgres-data:

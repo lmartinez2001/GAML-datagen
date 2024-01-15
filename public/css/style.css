@@ -105,11 +105,11 @@ h1 {
 }
 
 #instructions-container {
+  border-radius: .4rem;
+  border: 2px solid var(--dark-grey);
   margin: 50px auto;
-}
-
-#instructions-text {
-  margin-top: 20px;
+  padding: 2rem;
+  width: 100%;
 }
 
 @media screen and (max-width: 1300px) {
@@ -117,3 +117,5 @@ h1 {
     flex-direction: column;
   }
 }
+
+
