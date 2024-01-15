@@ -7,7 +7,7 @@ As these prompts are used to efficiently finetune an LLM, they must follow some 
 These prompts are used to bring the general context of the GAMA platform and GAML. They allow the LLM to create some logical and semantic analogies between GAML and other programming languages.  
 As illustrated in the below examples, this type of question-answer prompt looks a bit useless, as the main purpose of the model is to generate code. However, these prompts are essential to provide the LLM with a general context. That way it can create analogies between GAML and other programming languages learned by the LLM during its pre-training.
 
-> [!NOTE]
+> [!CAUTION]
 > Answers provided by the LLM can contain pieces of code. However, they will be considered as part of the whole answer text but not as a separate code snippet. (Take a look at the Examples section )
 
 **Examples**

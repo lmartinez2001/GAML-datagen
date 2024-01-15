@@ -17,7 +17,7 @@ const alertComponent = async (alertType, title, content) => {
 const replaceBlockquoteWithAlert = async (blockquote, title, text) => {
   const alertType = title.toLowerCase()
   const content = text
-    .replace(/\[!NOTE\]|\[!TIP\]|\[!WARNING\]|\[!IMPORTANT\]/, '')
+    .replace(/\[!NOTE\]|\[!TIP\]|\[!WARNING\]|\[!IMPORTANT\]|\[!CAUTION\]/, '')
     .trim()
   const alertHtml = await alertComponent(alertType, title, content)
   blockquote.outerHTML = alertHtml
