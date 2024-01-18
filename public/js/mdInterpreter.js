@@ -7,7 +7,7 @@ const getSvg = async (path) => {
 }
 
 const alertComponent = async (alertType, title, content) => {
-  const svg = await getSvg(`./svg/${title}.svg`)
+  const svg = await getSvg(`./svg/${title.toLowerCase()}.svg`)
   return `<div class="md-alert md-alert-${alertType}">
     <p class="md-alert-title">${svg}${title}</p>
     <p>${content}</p>
