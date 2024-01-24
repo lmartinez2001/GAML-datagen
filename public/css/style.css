@@ -21,6 +21,7 @@ body {
   justify-content: center;
   font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","CourierNew",monospace;
   color: var(--white);
+  overflow-y: scroll;
 }
 
 .wrapper {

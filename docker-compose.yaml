@@ -12,21 +12,42 @@ services:
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - postgres-data:/var/lib/postgresql/data
+  restart: always
 
-  # gamlgen:
-  #   build:
-  #     context: .
-  #   environment:
-  #     DB_HOST: ${DB_HOST_CLIENT}
-  #     DB_PORT: ${DB_PORT}
-  #     DB_USER: ${DB_USER}
-  #     DB_PWD: ${DB_PWD}
-  #     DB_NAME: ${DB_NAME}
-  #     DATABASE_URL: ${DATABASE_URL}
-  #   depends_on:
-  #     - postgres
-  #   ports:
-  #     - 0.0.0.0:8000:8000
+  backup:
+    image: postgres
+    depends_on:
+      - postgres
+    volumes:
+      - ./backup:/backup
+    command: >
+      bash -c "while true; do
+        PGPASSWORD=$$POSTGRES_PASSWORD pg_dump -h postgres -U $$POSTGRES_USER -Fc $$POSTGRES_DB > /backup/$$(date +%Y-%m-%d-%H-%M-%S).dump
+        echo ""Backup done at $$(date +%Y-%m-%d_%H:%M:%S)""
+        ls -1 /backup/*.dump | head -n -2 | xargs rm -f
+        sleep $$BACKUP_DELAY
+      done"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PWD}
+      - POSTGRES_DB=${DB_NAME}
+      - BACKUP_DELAY=${BACKUP_DELAY}
+
+  gamlgen:
+    build:
+      context: .
+    environment:
+      DB_HOST: ${DB_HOST_CLIENT}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PWD: ${DB_PWD}
+      DB_NAME: ${DB_NAME}
+      DATABASE_URL: ${DATABASE_URL}
+    depends_on:
+      - postgres
+    restart: always
+    ports:
+      - 0.0.0.0:8000:8000
 
   # gama-server:
   #   container_name: gama-server

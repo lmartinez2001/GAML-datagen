@@ -2,6 +2,8 @@
     --borderColor-default: white;
     --link-color: #2F81F7;
 
+    --code-bg: #343942;
+
     --alert-warning: #dd9300;
     --alert-note: #1F6FEB;
     --alert-important: #c036f7;
@@ -78,7 +80,7 @@
     scrollbar-color: var(--alert-note);
 }
 
-.md-block a {
+a {
     color: var(--link-color);
 }
 
@@ -151,6 +153,13 @@
     margin-bottom: 16px;
     color: inherit;
     border-left: .3em solid var(--borderColor-default);
+}
+
+.md-block code:not(pre > code) {
+    padding: .2em .4em;
+    background-color: var(--code-bg);
+    border-radius: 6px;
+    font-size: 85%;
 }
 
 

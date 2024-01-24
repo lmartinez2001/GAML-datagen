@@ -1,4 +1,4 @@
-const mdContent = new Request('README.md')
+const mdContent = new Request('instructions.md')
 
 const getSvg = async (path) => {
   const response = await fetch(path)
