@@ -12,11 +12,11 @@ const validateGAML = (req, res, next) => {
       results.push(match[1])
     }
 
-    if (results.length > 0) {
-      console.log('All code snippets', results)
-    } else {
-      console.log('No code in the answer')
-    }
+    // if (results.length > 0) {
+    //   console.log('All code snippets', results)
+    // } else {
+    //   console.log('No code in the answer')
+    // }
 
     next()
   }

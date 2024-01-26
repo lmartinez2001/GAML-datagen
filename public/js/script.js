@@ -1,10 +1,3 @@
-// TODO:
-// - [] syntax highlighting
-// - [] send question and answer to a backend
-// - [x] make sure that both question and answer fields are filled
-// - [x] clear them after submission
-// - [x] convert q&a to json before sending them
-
 const answerArea = document.querySelector('#answer-area')
 const questionArea = document.querySelector('#question-area')
 const warningMsg = document.querySelector('#warning-msg')
@@ -13,11 +6,33 @@ const instructionsTitle = document.querySelector('#instructions-title')
 const instructionsText = document.querySelector('.md-block')
 const instructionsIndicator = document.querySelector('#instructions-indicator')
 
+const colors = { white: '#EBEDF0', red: '#F85149', green: '#24a73e' }
+
 const msgs = {
-  default: 'Fill Question and Answer sections to submit',
-  qwarning: 'Fill Question section to submit',
-  awarning: 'Fill Answer section to submit',
-  success: 'Prompt succesfully sent',
+  default: {
+    msg: 'Fill Question and Answer sections to submit',
+    color: colors.white,
+  },
+  qwarning: {
+    msg: 'Fill Question section to submit',
+    color: colors.white,
+  },
+  awarning: {
+    msg: 'Fill Answer section to submit',
+    color: colors.white,
+  },
+  success: {
+    msg: 'Prompt succesfully sent',
+    color: colors.green,
+  },
+  fail: {
+    msg: 'Failed to send prompt to server. Please contact an admin',
+    color: colors.red,
+  },
+  sending: {
+    msg: 'Sending prompt...',
+    color: colors.white,
+  },
 }
 
 questionArea.addEventListener('input', () => {
@@ -30,6 +45,7 @@ answerArea.addEventListener('input', (event) => {
 
 submitButton.addEventListener('click', () => {
   // feed prompt q&a
+  warningMsg.innerText = msgs.sending.msg
   axios({
     url: `${document.location.origin}/graphql`,
     method: 'post',
@@ -52,21 +68,32 @@ submitButton.addEventListener('click', () => {
       },
     },
   }).then((result) => {
-    console.log(result.data)
+    res = result.data
+    if (res.errors) {
+      setMessage(msgs.fail)
+    } else {
+      setMessage(msgs.success)
+    }
   })
 
-  //   empty text area
+  // Empty text area
   questionArea.value = ''
   answerArea.value = ''
 
-  warningMsg.innerText = msgs.success
-
   submitButton.disabled = true
 
-  setTimeout(() => {
-    warningMsg.innerText = msgs.default
-  }, 1000)
+  // setMessage(msgs.success)
 })
+
+const setMessage = (message) => {
+  warningMsg.innerText = message.msg
+  warningMsg.style.color = message.color
+
+  setTimeout(() => {
+    warningMsg.innerText = msgs.default.msg
+    warningMsg.style.color = msgs.default.color
+  }, 1000)
+}
 
 const checkAreasFilled = () => {
   submitButton.disabled = questionArea.value === '' || answerArea.value === ''
