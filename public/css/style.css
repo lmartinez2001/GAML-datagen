@@ -101,8 +101,14 @@ h1 {
   margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 1300px) {
- 
+@media screen and (max-width: 720px) {
+  .prompt-container {
+    display: grid;
+    grid-template: repeat(2, 350px) 30px 60px / 1fr;
+    /* grid-template-rows: ; */
+    grid-gap: 1rem;
+    margin-bottom: 5rem;
+  }
 }
 
 footer {
