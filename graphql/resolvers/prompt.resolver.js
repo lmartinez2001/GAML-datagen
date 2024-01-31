@@ -12,14 +12,20 @@ const promptsResolver = {
       const id = args.id
       return await prisma.prompt.findUnique({ where: { id } })
     },
+
+    async promptsByNickname(_, args, context, info) {
+      const nickname = args.nickname
+      return await prisma.prompt.findMany({ where: { nickname } })
+    },
   },
   Mutation: {
     async createPrompt(_, args) {
-      const { question, answer } = args.input
+      const { question, answer, nickname } = args.input
       const createdPrompt = await prisma.prompt.create({
         data: {
           question,
           answer,
+          nickname,
         },
       })
 

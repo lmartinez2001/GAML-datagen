@@ -15,4 +15,5 @@ model Prompt {
   id       String @id @default(uuid())
   question String
   answer   String
+  nickname String @db.VarChar(30)
 }

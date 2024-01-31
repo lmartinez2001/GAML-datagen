@@ -5,6 +5,7 @@ const submitButton = document.querySelector('#submit-btn')
 const instructionsTitle = document.querySelector('#instructions-title')
 const instructionsText = document.querySelector('.md-block')
 const instructionsIndicator = document.querySelector('#instructions-indicator')
+const nicknameInput = document.querySelector('.nickname-input')
 
 const colors = { white: '#EBEDF0', red: '#F85149', green: '#24a73e' }
 
@@ -45,6 +46,7 @@ answerArea.addEventListener('input', (event) => {
 
 submitButton.addEventListener('click', () => {
   // feed prompt q&a
+  const nickname = nicknameInput.value ? nicknameInput.value : 'Guest'
   warningMsg.innerText = msgs.sending.msg
   axios({
     url: `${document.location.origin}/graphql`,
@@ -57,6 +59,7 @@ submitButton.addEventListener('click', () => {
           id
           question
           answer
+          nickname
         }
       }   
       `,

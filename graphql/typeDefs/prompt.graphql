@@ -1,16 +1,19 @@
 input PromptInput {
   question: String!
   answer: String!
+  nickname: String!
 }
 
 type Prompt {
   id: String!
   question: String!
   answer: String!
+  nickname: String!
 }
 
 type Query {
   prompt(id: String!): Prompt
+  promptsByNickname(nickname: String!): [Prompt]
   prompts: [Prompt]
 }
 
