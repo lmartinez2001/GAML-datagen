@@ -73,6 +73,7 @@ submitButton.addEventListener('click', () => {
   }).then((result) => {
     res = result.data
     if (res.errors) {
+      console.log(res.errors)
       setMessage(msgs.fail)
     } else {
       setMessage(msgs.success)
