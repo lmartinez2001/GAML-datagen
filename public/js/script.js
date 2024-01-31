@@ -67,6 +67,7 @@ submitButton.addEventListener('click', () => {
         input: {
           question: questionArea.value,
           answer: answerArea.value,
+          nickname: nickname,
         },
       },
     },
