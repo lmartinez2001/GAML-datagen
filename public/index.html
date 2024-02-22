@@ -12,19 +12,20 @@
 <body>
 <div class="wrapper">
   <h1>GAML Prompt Creator</h1>
-  <div class="nickname-container">
-    <h2 class="title">Enter Nickname (Optional)</h2>
-    <input type="text" class="nickname-input"></input >
+  <div class="large-bottom-separation">
+    <p class="prompts-counter small-bottom-separation"></p>
+    <h2 class="title small-bottom-separation">Enter Nickname (Optional)</h2>
+    <input type="text" class="nickname-input round-border"></input >
   </div>
-  <div class="prompt-container">
+  <div class="prompt-container large-bottom-separation">
     <div class="item">
       <h2 class="title">Request</h2>
-      <textarea id="question-area" cols="50" rows="30" class="content"></textarea>
+      <textarea id="question-area" cols="50" rows="30" class="content round-border"></textarea>
     </div>
   
     <div class="item">
       <h2 class="title">Answer</h2>
-      <textarea id="answer-area" cols="50" rows="30" class="content"></textarea>
+      <textarea id="answer-area" cols="50" rows="30" class="content round-border"></textarea>
     </div>
 
     <p id="warning-msg">Fill Question and Answer sections to submit</p>
@@ -35,8 +36,17 @@
  
   </div>
   
-  <h2 id="instructions-title"><i id="instructions-indicator" class="fa-solid fa-angle-down"></i> Instructions</h2>
-  <div class="md-block"></div>
+  <h2 id="instructions-title" class="small-bottom-separation"><i id="instructions-indicator" class="fa-solid fa-angle-down"></i> Instructions</h2>
+  <div class="md-block large-bottom-separation"></div>
+  
+  <h2 id="prompts-title"><i id="prompts-indicator" class="fa-solid fa-angle-down small-bottom-separation"></i> Prompts</h2>
+  <!-- <div id="prompts-text"></div> -->
+  <div id="prompts-wrapper">
+    <h3 class="small-bottom-separation">Contributions ranking:</h3>
+    <div class="prompts-nicknames"></div>
+  <div id="prompts-text" class="prompts-container"></div>
+  </div>
+  
   
 </div>
 

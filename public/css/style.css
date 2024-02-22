@@ -7,7 +7,8 @@
   --yellow: #EEB64F;
   --white: #EBEDF0;
 
-  --under-section-margin: 5rem;
+  --large-under-section-margin: 5rem;
+  --small-under-section-margin: 1rem;
   --content-border-radius: .4rem;
 }
 
@@ -37,14 +38,21 @@ h1 {
   margin: 4rem auto;
 }
 
-.nickname-container {
-  margin-bottom: var(--under-section-margin);
+.large-bottom-separation {
+  margin-bottom: var(--large-under-section-margin);
+}
+
+.small-bottom-separation {
+  margin-bottom: var(--small-under-section-margin);
+}
+
+.round-border {
+  border-radius: var(--content-border-radius);
 }
 
 .nickname-input {
   background-color: var(--dark-grey);
   border: .2px solid var(--light-grey);
-  border-radius: var(--content-border-radius);
   height: 1.3rem;
   color: white;
   padding: 1rem;
@@ -61,11 +69,9 @@ h1 {
   display: grid;
   grid-template: 350px 60px / repeat(2, 1fr);
   grid-gap: 1rem;
-  margin-bottom: var(--under-section-margin);
 }
 
 .title {
-  margin-bottom: 1rem;
   width: fit-content;
 }
 
@@ -75,7 +81,6 @@ h1 {
   color: white;
   padding: 1rem;
   font-size: 1.2rem;
-  border-radius: var(--content-border-radius);
   width:  100%;
   height: 300px;
 }
@@ -121,7 +126,6 @@ h1 {
 #instructions-title {
   width: fit-content;
   cursor: pointer;
-  margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 720px) {
@@ -134,8 +138,60 @@ h1 {
   }
 }
 
-footer {
-  padding: 10px;
+
+/* PROMPTS DISPLAY */
+#prompts-title {
+  cursor: pointer;
 }
+
+.sample-subtitle {
+  margin: .5rem .2rem;
+}
+
+.prompts-counter {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.prompts-nickname-sample {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.sample-container {
+  margin: 1rem 0;
+  background-color: var(--dark-grey);
+  border-radius: 0.4rem;
+  padding: 1rem;
+}
+
+.sample-nickname {}
+
+.sample-question {}
+
+.sample-answer-container {
+  overflow-x: auto;
+}
+
+.sample-answer {
+  white-space: nowrap;
+}
+
+
+.prompts-nickname-sample:nth-child(1) {
+  color: var(--yellow);
+  font-weight: bold;
+}
+
+.sample-question-container, .sample-answer-container {
+  padding: 0.5rem;
+  background-color: var(--grey);
+  border-radius: 0.4rem;
+}
+
+.sample-question-container {
+  margin-bottom: 1rem;
+}
+
 
 

@@ -1,11 +1,16 @@
-const answerArea = document.querySelector('#answer-area')
+const nicknameInput = document.querySelector('.nickname-input')
 const questionArea = document.querySelector('#question-area')
+const answerArea = document.querySelector('#answer-area')
 const warningMsg = document.querySelector('#warning-msg')
 const submitButton = document.querySelector('#submit-btn')
+
 const instructionsTitle = document.querySelector('#instructions-title')
-const instructionsText = document.querySelector('.md-block')
 const instructionsIndicator = document.querySelector('#instructions-indicator')
-const nicknameInput = document.querySelector('.nickname-input')
+const instructionsText = document.querySelector('.md-block')
+
+const promptsTitle = document.querySelector('#prompts-title')
+const promptsIndicator = document.querySelector('#prompts-indicator')
+const promptsWrapper = document.querySelector('#prompts-wrapper')
 
 const colors = { white: '#EBEDF0', red: '#F85149', green: '#24a73e' }
 
@@ -36,6 +41,7 @@ const msgs = {
   },
 }
 
+// Check if question and answer areas are filled to enable the Submit button
 questionArea.addEventListener('input', () => {
   checkAreasFilled()
 })
@@ -44,8 +50,8 @@ answerArea.addEventListener('input', (event) => {
   checkAreasFilled()
 })
 
+// Send inputed data to the database
 submitButton.addEventListener('click', () => {
-  // feed prompt q&a
   const nickname = nicknameInput.value ? nicknameInput.value : 'Guest'
   warningMsg.innerText = msgs.sending.msg
   axios({
@@ -86,10 +92,9 @@ submitButton.addEventListener('click', () => {
   answerArea.value = ''
 
   submitButton.disabled = true
-
-  // setMessage(msgs.success)
 })
 
+// Manage the content of the text under the textareas
 const setMessage = (message) => {
   warningMsg.innerText = message.msg
   warningMsg.style.color = message.color
@@ -100,10 +105,12 @@ const setMessage = (message) => {
   }, 1000)
 }
 
+// Disable the Submit button as long as both question and answer areas are not filled
 const checkAreasFilled = () => {
   submitButton.disabled = questionArea.value === '' || answerArea.value === ''
 }
 
+// Toogle Instructions section visibility
 instructionsTitle.addEventListener('click', () => {
   var classlist = instructionsText.classList
   classlist.toggle('invisible')
@@ -115,3 +122,93 @@ instructionsTitle.addEventListener('click', () => {
     instructionsIndicator.classList.add('fa-angle-down')
   }
 })
+
+// Toogle Prompts section visibility
+promptsTitle.addEventListener('click', () => {
+  var classlist = promptsWrapper.classList
+  classlist.toggle('invisible')
+  if (classlist.contains('invisible')) {
+    promptsIndicator.classList.remove('fa-angle-down')
+    promptsIndicator.classList.add('fa-angle-up')
+  } else {
+    promptsIndicator.classList.remove('fa-angle-up')
+    promptsIndicator.classList.add('fa-angle-down')
+  }
+})
+
+// MANAGE DISPLAY OF DATABASE SAMPLES
+const promptsContainer = document.querySelector('.prompts-container')
+const promptsCounter = document.querySelector('.prompts-counter')
+const promptsNicknames = document.querySelector('.prompts-nicknames')
+
+const fetchDbData = async () => {
+  const data = await axios({
+    url: `${document.location.origin}/graphql`,
+    method: 'get',
+    data: {
+      query: `
+      query Prompts {
+        prompts {
+          question
+          answer
+          nickname
+        }
+      }   
+      `,
+    },
+  })
+
+  // const data = await fetch('res/prompts.json')
+  const jsonData = await data.json()
+  return jsonData.data.prompts
+}
+
+const addDbContent = async () => {
+  var nicknameOccurences = {}
+  const data = await fetchDbData()
+  promptsCounter.innerText = `${data.length} samples in the dataset`
+
+  data.forEach((prompt) => {
+    const sample = document.createElement('div')
+    sample.className = 'sample-container'
+
+    var answer = prompt.answer
+    answer = answer.replace(/\n/g, '<br>')
+    answer = answer.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
+
+    var nickname = prompt.nickname
+    nickname = nickname.replace(/\s+/g, '')
+    if (nicknameOccurences[nickname] === undefined) {
+      nicknameOccurences[nickname] = 1
+    } else {
+      nicknameOccurences[nickname]++
+    }
+
+    sample.innerHTML = `
+        <h3 class="sample-nickname small-bottom-separation">${prompt.nickname}</h3>
+        <h4 class="sample-subtitle">Question</h4>
+        <div class="sample-question-container">
+          <p class="sample-question small-bottom-separation">${prompt.question}</p>
+        </div>
+        <h4 class="sample-subtitle">Answer</h4>
+        <div class="sample-answer-container">
+          <p class="sample-answer">${answer}</p>
+        </div>
+    `
+    promptsContainer.appendChild(sample)
+  })
+
+  var sortedNicknames = Object.keys(nicknameOccurences).sort(function (a, b) {
+    return nicknameOccurences[b] - nicknameOccurences[a]
+  })
+
+  sortedNicknames.forEach((nickname) => {
+    const sample = document.createElement('p')
+    sample.className = 'prompts-nickname-sample'
+
+    sample.innerText = `${nickname} - ${nicknameOccurences[nickname]}`
+    promptsNicknames.appendChild(sample)
+  })
+}
+
+addDbContent()
