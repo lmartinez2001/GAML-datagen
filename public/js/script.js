@@ -142,31 +142,30 @@ const promptsCounter = document.querySelector('.prompts-counter')
 const promptsNicknames = document.querySelector('.prompts-nicknames')
 
 const fetchDbData = async () => {
-  const data = await axios({
+  const res = await axios({
     url: `${document.location.origin}/graphql`,
-    method: 'get',
+    method: 'post',
     data: {
       query: `
       query Prompts {
         prompts {
+          nickname
           question
           answer
-          nickname
         }
-      }   
+      } 
       `,
     },
   })
-
-  // const data = await fetch('res/prompts.json')
-  const jsonData = await data.json()
-  return jsonData.data.prompts
+  return res.data.data.prompts
 }
 
 const addDbContent = async () => {
   var nicknameOccurences = {}
   const data = await fetchDbData()
-  promptsCounter.innerText = `${data.length} samples in the dataset`
+  promptsCounter.innerText = `${data.length} ${
+    data.length > 1 ? 'samples' : 'sample'
+  } in the dataset`
 
   data.forEach((prompt) => {
     const sample = document.createElement('div')
